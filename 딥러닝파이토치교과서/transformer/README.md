@@ -32,22 +32,24 @@
 </br>
 
 ## `forward`
-[1] encoding
+[1] **Encoding**
 1) `_encode_concat(inputs)`
-  - `self.modalities.items()`
-    ```
-    mods = {
-      "rgb":   {"kind": "image",  "in_ch": 3, "dim": 128},
-      "depth": {"kind": "image",  "in_ch": 1, "dim": 128},
-      "q":     {"kind": "vector", "in_dim": 7, "dim": 256},
-    }
-    ```
-  - `enc = self.encoders[name]`
+   - 비어있는 Dict inputs 으로 `_encode_concat` 호출
+     - 
+   - `self.modalities.items()`
+      ```
+      mods = {
+        "rgb":   {"kind": "image",  "in_ch": 3, "dim": 128},
+        "depth": {"kind": "image",  "in_ch": 1, "dim": 128},
+        "q":     {"kind": "vector", "in_dim": 7, "dim": 256},
+      }
+      ```
+    - `enc = self.encoders[name]`
     
-2) positional encoding
+2) `self.pos_enc(tokens)` (positional encoding)
 3) Encoder
   - `nn.TransformerEncoder(enc_layer, num_layers=num_encoder_layers)`
-[2] Decoding
+[2] **Decoding**
   - positional encoding
   - Decoder
     - `nn.TransformerDecoder(dec_layer, num_layers=num_decoder_layers)`
